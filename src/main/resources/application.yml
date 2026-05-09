@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: application
+  profiles:
+    active: dev
+  config:
+    import: optional:configserver:http://localhost:8888
+
+
+
+  cloud:
+    bus:
+      enabled: true
+      stream:
+        bindings:
+          springCloudBusInput:
+            destination: my-topic
+          springCloudBusOutput:
+            destination: my-topic
+
+        kafka:
+          bootstrap-servers: localhost:9092,localhost:9093
+  # Kafka broker address
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,beans,refresh
