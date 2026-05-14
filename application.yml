@@ -1,21 +1,23 @@
-server:
-  port: 8081
-
 spring:
   application:
-    name: config-client
+    name: application
+  profiles:
+    active: dev
   config:
-    import: "optional:configserver:http://localhost:8888" # URL of the config server
-  kafka:
-    bootstrap-servers: localhost:9092 # Adjust if Kafka is running on a different port/host
+    import: optional:configserver:http://localhost:8888
+
+#server:
+  #port: 8089
+
 
   cloud:
     bus:
       enabled: true
-    bootstrap-servers: localhost:9092,localhost:9093
+      bootstrap-servers: localhost:9092,localhost:9093
+  # Kafka broker address
 
-  management:
-    endpoints:
-      web:
-        exposure:
-          include: health,info,env,beans,refresh
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,beans,refresh
